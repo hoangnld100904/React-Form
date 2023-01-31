@@ -1,17 +1,28 @@
-import React from "react";
+import {React, useState} from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+// import UpdateModal from "./updateModal";
 export function Table() {
     const dispatch = useDispatch();
-    const handleDelete = (id)=>{
+    const handleDelete = (id) => {
         dispatch({
             type: 'DeleteUser',
             id
         })
     }
     const { mangNhanVien } = useSelector(state => state);
+
     console.log(mangNhanVien)
+
+    // const [show, setShow] = useState(false);
+    // const [user, setUser] = useState({});
+    // function handleClose(){
+    //     setShow(false);
+    // }
+    // const handleUpdate = (user) => {
+    //     setUser(user)
+    //     setShow(true);
+    // };
     function renderData() {
         return mangNhanVien.map((nv, index) => {
             return <tr key={index}>
@@ -19,7 +30,7 @@ export function Table() {
                 <td>{nv.name}</td>
                 <td>{nv.phone}</td>
                 <td>{nv.email}</td>
-                <td><button className="btn btn-danger" onClick={()=>{handleDelete(index)}}>Delete</button></td>
+                <td><button className="btn btn-danger" onClick={() => { handleDelete(index) }}>Delete</button></td>
                 <td><button className="btn btn-primary">Update</button></td>
             </tr>
         })
@@ -41,6 +52,11 @@ export function Table() {
                     {renderData()}
                 </tbody>
             </table>
+            {/* <UpdateModal
+                show={show}
+                user={user}
+                handleClose={handleClose}
+            /> */}
         </div>
     )
 }

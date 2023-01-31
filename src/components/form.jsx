@@ -49,7 +49,7 @@ export function Form() {
                         <input type="text" name="email" className="form-control" onChange={handleChange} />
                     </div>
                 </div>
-                <button className="float-left my-3 btn btn-success" onClick={handleSubmit}>Submit</button>
+                <button className="float-left my-3 btn btn-success">Submit</button>
             </div>
         </div>
     )
