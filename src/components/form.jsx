@@ -19,20 +19,24 @@ export function Form() {
     })
     const handleChange = (event) => {
         let tagInput = event.target
-        let {name, value, type} = tagInput
+        let {name, value, type, pattern} = tagInput
         console.log(name, value)
         let errorMessage = ''
         // Handle check Empty input
         if (value.trim() === '') {
             errorMessage = name + 'không được để trống'
         }
+        
         // Handle check Empty input
         //Handle check email template
         if (type === 'email'){
-            const regExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+            const regExp = new RegExp(pattern)
             if (!regExp.test(name)){
                 errorMessage = 'Email không đúng định dạng'
             }
+        }
+        else {
+            errorMessage = ''
         }
         //Handle check email template
         setUser({
@@ -43,6 +47,7 @@ export function Form() {
             ...error,
             [name]: errorMessage
         })
+        console.log(error)
       };
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -77,7 +82,7 @@ export function Form() {
                     </div>
                     <div className="input_container col-6">
                         <p>Email</p>
-                        <input type="text" name="email" className="form-control" onChange={handleChange} />
+                        <input type="email" name="email" className="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" onChange={handleChange} />
                         <span className="text-danger">{error.email}</span>
                     </div>
                     <button className="float-left my-3 btn btn-success" type='submit' style={{width: '100px'}}>Submit</button>
